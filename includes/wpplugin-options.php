@@ -34,8 +34,17 @@ function wpplugins_settings()
     add_settings_field( 'wpplugins_settings_field', 'My Custom Fields', 'wpplugins_settings_field_callback', 'wpplugin', 'wpplugins_settings_section');
     add_settings_field( 'wpplugins_settings_field_checkbox', __('Checkbox' , 'wpplugin'), 'wpplugins_settings_field_checkbox_callback', 'wpplugin', 'wpplugins_settings_section',array('label'=>'Checkbox label'));
     add_settings_field( 'wpplugins_settings_field_radio', __('Radio' , 'wpplugin'), 'wpplugins_settings_field_radio_callback', 'wpplugin', 'wpplugins_settings_section',array('option_one'=>'Radio 1', 'option_two'=>'Radio 2'));
-    add_settings_field( 'wpplugins_settings_field_select', __('Select Dropdown' , 'wpplugin'), 'wpplugins_settings_field_select_callback', 'wpplugin', 'wpplugins_settings_section',array('select_one'=>'Dropdown 1', 'select_two'=>'Dropdown 2'));
+    add_settings_field( 'wpplugins_settings_field_select', __('My Custom Text' , 'wpplugin'), 'wpplugins_settings_field_select_callback', 'wpplugin', 'wpplugins_settings_section',array('select_one'=>'Dropdown 1', 'select_two'=>'Dropdown 2'));
+
+    add_settings_field( 'wpplugins_settings_field_general', __('My General Label' , 'wpplugin'), 'wpplugins_settings_field_general_callback', 'general', 'default',array('select_one'=>'Dropdown 1', 'select_two'=>'Dropdown 2'));
+    add_settings_field( 'wpplugins_settings_field_reading', __('My Reading Label' , 'wpplugin'), 'wpplugins_settings_field_reading_callback', 'reading', 'default',array('select_one'=>'Dropdown 1', 'select_two'=>'Dropdown 2'));
+    add_settings_field( 'wpplugins_settings_field_writing', __('My Writing Label' , 'wpplugin'), 'wpplugins_settings_field_writing_callback', 'writing', 'default',array('select_one'=>'Dropdown 1', 'select_two'=>'Dropdown 2'));
+   
     register_setting( 'wpplugin_settings', 'wpplugin_settings' );
+
+    register_setting( 'general', 'wpplugin_settings' ); // register setting in General Tab under Settings Options
+    register_setting( 'reading', 'wpplugin_settings' ); // reading setting in General Tab under Settings Options
+    register_setting( 'writing', 'wpplugin_settings' ); // writing setting in General Tab under Settings Options
 }
 
 add_action('admin_init', 'wpplugins_settings');
@@ -103,4 +112,19 @@ function wpplugins_settings_field_select_callback($args)
     $html .= '<option value="' .$args['select_two']. '" '. selected( $select, $args['select_two'], false ) .'>' . $args['select_two'] .'</option>';
     $html .= '</select>';
     echo $html;
+}
+
+function wpplugins_settings_field_general_callback($args)
+{
+    echo "<h1>My General Setting page</h1>";
+}
+
+function wpplugins_settings_field_reading_callback($args)
+{
+    echo "<h1>My Reading Setting page</h1>";
+}
+
+function wpplugins_settings_field_writing_callback($args)
+{
+    echo "<h1>My Writing Setting page</h1>";
 }
